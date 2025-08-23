@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1DgzsFwziy0ceIt5JWwgL9uGfMf0apyaW
 """
 
-!pip install streamlit scikit-learn xgboost pandas openpyxl
-
 import streamlit as st
 import pandas as pd
 import joblib
@@ -16,22 +14,22 @@ import joblib
 # ==============================
 # 1. Configuración de la App
 # ==============================
-st.set_page_config(page_title="Comparador de Modelos ML", layout="wide")
+st.set_page_config(page_title="TRABAJO FINAL APRENDIZAJE DE MÁQUINAS", layout="wide")
 st.title("📊 Predicción de Naturaleza de la Violencia")
-st.write("Sube un archivo Excel con los datos de despliegue y compara los resultados de 8 modelos entrenados.")
+st.write("Sube un archivo Excel con los datos de despliegue.")
 
 # ==============================
 # 2. Cargar Modelos
 # ==============================
 modelos = {
-    "Logistic Regression": "/content/drive/MyDrive/trabajo_final/save_models/LogisticRegression_pipeline.pkl",
-    "Linear SVC": "/content/drive/MyDrive/trabajo_final/save_models/LinearSVC_pipeline.pkl",
-    "KNeighbors": "/content/drive/MyDrive/trabajo_final/save_models/KNeighborsClassifier_pipeline.pkl",
+    "Logistic Regression": "LogisticRegression_pipeline.pkl",
+    "Linear SVC": "LinearSVC_pipeline.pkl",
+    "KNeighbors": "KNeighborsClassifier_pipeline.pkl",
     "Decision Tree": "DecisionTreeClassifier_pipeline.pkl",
-    "SVM": "/content/drive/MyDrive/trabajo_final/save_models/SVM_pipeline.pkl",
-    "Voting Classifier": "/content/drive/MyDrive/trabajo_final/save_models/VotingClassifier_pipeline.pkl",
-    "Random Forest": "/content/drive/MyDrive/trabajo_final/save_models/RandomForestClassifier_pipeline.pkl",
-    "XGBoost": "/content/drive/MyDrive/trabajo_final/save_models/XGBoostClassifier_pipeline.pkl"
+    "SVM": "SVM_pipeline.pkl",
+    "Voting Classifier": "VotingClassifier_pipeline.pkl",
+    "Random Forest": "RandomForestClassifier_pipeline.pkl",
+    "XGBoost": "XGBoostClassifier_pipeline.pkl"
 }
 
 # Cargar todos los modelos en memoria
