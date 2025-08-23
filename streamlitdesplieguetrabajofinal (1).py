@@ -28,7 +28,7 @@ modelos = {
     "Decision Tree": "DecisionTreeClassifier_pipeline.pkl",
     "SVM": "SVM_pipeline.pkl",
     "Voting Classifier": "VotingClassifier_pipeline.pkl",
-    "Random Forest": "RandomForestClassifier_pipeline.pkl",
+    #"Random Forest": "RandomForestClassifier_pipeline.pkl",
     "XGBoost": "XGBoostClassifier_pipeline.pkl"
 }
 
