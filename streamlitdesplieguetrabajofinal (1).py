@@ -44,7 +44,7 @@ for nombre, archivo in modelos.items():
 # 2b. Cargar LabelEncoder (solo para XGBoost)
 # ==============================
 try:
-    label_encoder = joblib.load("labelencoder_y.pkl")
+    label_encoder = joblib.load("LabelEncoder_pipeline.pkl")
 except Exception as e:
     label_encoder = None
     st.warning(f"No se pudo cargar el LabelEncoder: {e}")
