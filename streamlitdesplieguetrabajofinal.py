@@ -5,7 +5,7 @@ import os
 
 import os
 
-ruta_modelo = "LogisticRegression_pipeline.pkl"  # aquí pones la variable/ruta que usas
+ruta_modelo = "KNeighborsClassifier_pipeline.pkl"  # aquí pones la variable/ruta que usas
 ruta_completa = os.path.abspath(ruta_modelo)
 
 print(f"🔎 Intentando cargar el archivo en la ruta: {ruta_completa}")
