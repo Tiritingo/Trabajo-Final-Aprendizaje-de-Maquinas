@@ -8,7 +8,7 @@ try:
   linearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
   KNeighborsClassifier_model = joblib.load('KNeighborsClassifier_pipeline.pkl')
   DecisionTreeClassifier_model = joblib.load('DecisionTreeClassifier_pipeline.pkl')
-  svm_model = joblib.load('save_models/SMV_pipeline.pkl')
+  svm_model = joblib.load('SMV_pipeline.pkl')
   votingClassifier_model = joblib.load('VotingClassifier_pipeline.pkl')
   randomForestClassifier_model = joblib.load('RandomForestClassifier_pipeline.pkl')
   XGBoostClassifier_model = joblib.load('XGBoostClassifier_pipeline.pkl')
@@ -42,13 +42,13 @@ if uploaded_file is not None:
         LSVC_predictions = linearSVC_model.predict(df)
         df['Predicted_LinearSVC_Naturaleza'] = LSVC_predictions
         st.write("Predicciones (Linear SVC):")
-        st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_lSVC_Naturaleza']].head())
+        st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_LinearSVC_Naturaleza']].head())
 
         # KNeighbors Classifier
         KNN_predictions = KNeighborsClassifier_model.predict(df)
         df['Predicted_KNN_Naturaleza'] = KNN_predictions
         st.write("Predicciones (KNN):")
-        st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_lSVC_Naturaleza']].head())
+        st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_KNN_Naturaleza']].head())
 
         # Decision Tree Classifier
         DT_predictions = DecisionTreeClassifier_model.predict(df)
