@@ -42,56 +42,57 @@ if uploaded_file is not None:
         st.subheader("Predicciones:")
 
         # Logistic Regression Classifier
-        lr_predictions = logisticRegression_model.predict(df)
-        df['Predicted_LR_Naturaleza'] = lr_predictions
+        Lr_predictions = logisticRegression_model.predict(df)
+        df['Predicted_LR_Naturaleza'] = Lr_predictions
         st.write("Predicciones (Logistic Regression Classifier): ")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_LR_Naturaleza']].head())
 
         # Linear SVC
-        lSVC_predictions = linearSVC_model.predict(df)
-        df['Predicted_LinearSVC_Naturaleza'] = linearSVC_model
+        LSVC_predictions = linearSVC_model.predict(df)
+        df['Predicted_LinearSVC_Naturaleza'] = LSVC_predictions
         st.write("Predicciones (Linear SVC):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_lSVC_Naturaleza']].head())
 
         # KNeighbors Classifier
         KNN_predictions = KNeighborsClassifier_model.predict(df)
-        df['Predicted_Aprobó_SVM'] = KNN_predictions
+        df['Predicted_KNN_Naturaleza'] = KNN_predictions
         st.write("Predicciones (KNN):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_lSVC_Naturaleza']].head())
 
         # Decision Tree Classifier
         DT_predictions = DecisionTreeClassifier_model.predict(df)
-        df['Predicted_Aprobó_DT'] = DT_predictions
+        df['Predicted_DT_Naturaleza'] = DT_predictions
         st.write("Predicciones (Decision Tree):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_DT_Naturaleza']].head())
 
         # SMV
-        svm_predictions = svm_model.predict(df)
-        df['Predicted_Aprobó_SVM'] = svm_predictions
+        SMV_predictions = svm_model.predict(df)
+        df['Predicted_SVM_Naturaleza'] = SMV_predictions
         st.write("Predicciones (SMV):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_SVM_Naturaleza']].head())
 
         # Voting Classifier
-        voting_predictions = votingClassifier_model.predict(df)
-        df['Predicted_Aprobó_Voting'] = voting_predictions
+        Voting_predictions = votingClassifier_model.predict(df)
+        df['Predicted_Voting_Naturaleza'] = Voting_predictions
         st.write("Predicciones (Voting Classifier):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_Voting_Naturaleza']].head())
 
         # Random Forrest classifier
-        randomForest_predictions = randomForestClassifier_model.predict(df)
-        df['Predicted_Aprobó_RF'] = randomForest_predictions
+        RandomForest_predictions = randomForestClassifier_model.predict(df)
+        df['Predicted_RF_Naturaleza'] = randomForest_predictions
         st.write("Predicciones (Random Forrest):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_RF_Naturaleza']].head())
 
         # XGBoost Classifier
         XGBoost_predictions = XGBoostClassifier_model.predict(df)
-        df['Predicted_Aprobó_XGB'] = XGBoost_predictions
+        df['Predicted_XGB_Naturaleza'] = XGBoost_predictions
         st.write("Predicciones (XGBoost):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_XGB_Naturaleza']].head())
 
         st.subheader("Resultados Completos:")
         # Check if the columns exist before trying to display them
-        display_cols = ['ID', 'Examen_admisión', 'Felder', 'Predicted_Aprobó_RF', 'Predicted_Aprobó_SVM']
+        display_cols = ['edad_', 'sexo_', 'nombre_comuna', 'Predicted_LR_Naturaleza', 'Predicted_LinearSVC_Naturaleza', 'Predicted_KNN_Naturaleza', 'Predicted_DT_Naturaleza', 'Predicted_SVM_Naturaleza',
+                       'Predicted_Voting_Naturaleza', 'Predicted_RF_Naturaleza']
 
     except Exception as e:
         st.error(f"Ocurrió un error al procesar el archivo: {e}")
