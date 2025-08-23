@@ -28,7 +28,7 @@ modelos = {
     "Decision Tree": "DecisionTreeClassifier_pipeline.pkl",
     "SVM": "SVM_pipeline.pkl",
     "Voting Classifier": "VotingClassifier_pipeline.pkl",
-    #"Random Forest": "RandomForestClassifier_pipeline.pkl",
+    # "Random Forest": "RandomForestClassifier_pipeline.pkl",  # pesa demasiado
     "XGBoost": "XGBoostClassifier_pipeline.pkl"
 }
 
@@ -39,6 +39,15 @@ for nombre, archivo in modelos.items():
         modelos_cargados[nombre] = joblib.load(archivo)
     except Exception as e:
         st.warning(f"No se pudo cargar {nombre}: {e}")
+
+# ==============================
+# 2b. Cargar LabelEncoder (solo para XGBoost)
+# ==============================
+try:
+    label_encoder = joblib.load("labelencoder_y.pkl")
+except Exception as e:
+    label_encoder = None
+    st.warning(f"No se pudo cargar el LabelEncoder: {e}")
 
 # ==============================
 # 3. Subir archivo Excel
@@ -58,7 +67,13 @@ if uploaded_file is not None:
     for nombre, modelo in modelos_cargados.items():
         try:
             y_pred = modelo.predict(df)
+
+            # Si es XGBoost, decodificar con el LabelEncoder
+            if nombre == "XGBoost" and label_encoder is not None:
+                y_pred = label_encoder.inverse_transform(y_pred)
+
             resultados[nombre] = y_pred
+
         except Exception as e:
             st.error(f"Error al predecir con {nombre}: {e}")
 
