@@ -3,6 +3,10 @@ import pandas as pd
 import joblib
 import os
 
+import os
+st.write("Directorio actual:", os.getcwd())
+st.write("Archivos allí:", os.listdir())
+
 try:
   LogisticRegression_model = joblib.load('LogisticRegression_pipeline.pkl')
   LinearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
