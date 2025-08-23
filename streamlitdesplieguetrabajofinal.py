@@ -13,14 +13,14 @@ import joblib
 import os
 
 try:
-  logisticRegression_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/LogisticRegression_pipeline.pkl')
-  linearSVC_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/LinearSVC_pipeline.pkl')
-  KNeighborsClassifier_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/KNeighborsClassifier_pipeline.pkl')
-  DecisionTreeClassifier_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/DecisionTreeClassifier_pipeline.pkl')
-  svm_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/SMV_pipeline.pkl')
-  votingClassifier_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/VotingClassifier_pipeline.pkl')
-  randomForestClassifier_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/RandomForestClassifier_pipeline.pkl')
-  XGBoostClassifier_model = joblib.load('/content/drive/MyDrive/trabajo_final/save_models/XGBoostClassifier_pipeline.pkl')
+  logisticRegression_model = joblib.load('LogisticRegression_pipeline.pkl')
+  linearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
+  KNeighborsClassifier_model = joblib.load('KNeighborsClassifier_pipeline.pkl')
+  DecisionTreeClassifier_model = joblib.load('DecisionTreeClassifier_pipeline.pkl')
+  svm_model = joblib.load('save_models/SMV_pipeline.pkl')
+  votingClassifier_model = joblib.load('VotingClassifier_pipeline.pkl')
+  randomForestClassifier_model = joblib.load('RandomForestClassifier_pipeline.pkl')
+  XGBoostClassifier_model = joblib.load('XGBoostClassifier_pipeline.pkl')
 except FileNotFoundError:
   st.error("El archivo no se encuentra en la ruta especificada.")
   st.stop()
