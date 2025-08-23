@@ -3,22 +3,6 @@ import pandas as pd
 import joblib
 import os
 
-import os
-
-ruta_modelo = "KNeighborsClassifier_pipeline.pkl"  # aquí pones la variable/ruta que usas
-ruta_completa = os.path.abspath(ruta_modelo)
-
-print(f"🔎 Intentando cargar el archivo en la ruta: {ruta_completa}")
-
-if os.path.exists(ruta_modelo):
-    print("✅ El archivo existe, se procederá a cargarlo...")
-else:
-    print("❌ El archivo NO existe en esa ruta.")
-
-# Aquí sigue la carga del modelo
-# modelo = joblib.load(ruta_modelo)
-
-
 try:
   LogisticRegression_model = joblib.load('LogisticRegression_pipeline.pkl')
   LinearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
