@@ -4,13 +4,13 @@ import joblib
 import os
 
 try:
-  logisticRegression_model = joblib.load('LogisticRegression_pipeline.pkl')
-  linearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
+  LogisticRegression_model = joblib.load('LogisticRegression_pipeline.pkl')
+  LinearSVC_model = joblib.load('LinearSVC_pipeline.pkl')
   KNeighborsClassifier_model = joblib.load('KNeighborsClassifier_pipeline.pkl')
   DecisionTreeClassifier_model = joblib.load('DecisionTreeClassifier_pipeline.pkl')
-  svm_model = joblib.load('SMV_pipeline.pkl')
-  votingClassifier_model = joblib.load('VotingClassifier_pipeline.pkl')
-  randomForestClassifier_model = joblib.load('RandomForestClassifier_pipeline.pkl')
+  SMV_model = joblib.load('SMV_pipeline.pkl')
+  VotingClassifier_model = joblib.load('VotingClassifier_pipeline.pkl')
+  RandomForestClassifier_model = joblib.load('RandomForestClassifier_pipeline.pkl')
   XGBoostClassifier_model = joblib.load('XGBoostClassifier_pipeline.pkl')
 except FileNotFoundError:
   st.error("El archivo no se encuentra en la ruta especificada.")
@@ -23,7 +23,7 @@ uploaded_file = st.file_uploader("Carga tu archivo Excel", type=["xlsx"])
 
 if uploaded_file is not None:
     try:
-        # Read the selected sheet into a pandas DataFrame
+        # Read DataFrame
         df = pd.read_excel(uploaded_file)
 
         st.subheader("Datos cargados:")
@@ -33,13 +33,13 @@ if uploaded_file is not None:
         st.subheader("Predicciones:")
 
         # Logistic Regression Classifier
-        Lr_predictions = logisticRegression_model.predict(df)
+        Lr_predictions = LogisticRegression_model.predict(df)
         df['Predicted_LR_Naturaleza'] = Lr_predictions
         st.write("Predicciones (Logistic Regression Classifier): ")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_LR_Naturaleza']].head())
 
         # Linear SVC
-        LSVC_predictions = linearSVC_model.predict(df)
+        LSVC_predictions = LinearSVC_model.predict(df)
         df['Predicted_LinearSVC_Naturaleza'] = LSVC_predictions
         st.write("Predicciones (Linear SVC):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_LinearSVC_Naturaleza']].head())
@@ -57,19 +57,19 @@ if uploaded_file is not None:
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_DT_Naturaleza']].head())
 
         # SMV
-        SMV_predictions = svm_model.predict(df)
+        SMV_predictions = SMV_model.predict(df)
         df['Predicted_SVM_Naturaleza'] = SMV_predictions
         st.write("Predicciones (SMV):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_SVM_Naturaleza']].head())
 
         # Voting Classifier
-        Voting_predictions = votingClassifier_model.predict(df)
+        Voting_predictions = VotingClassifier_model.predict(df)
         df['Predicted_Voting_Naturaleza'] = Voting_predictions
         st.write("Predicciones (Voting Classifier):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_Voting_Naturaleza']].head())
 
         # Random Forrest classifier
-        RandomForest_predictions = randomForestClassifier_model.predict(df)
+        RandomForest_predictions = RandomForestClassifier_model.predict(df)
         df['Predicted_RF_Naturaleza'] = randomForest_predictions
         st.write("Predicciones (Random Forrest):")
         st.write(df[['edad_', 'sexo_', 'nombre_comuna', 'Predicted_RF_Naturaleza']].head())
