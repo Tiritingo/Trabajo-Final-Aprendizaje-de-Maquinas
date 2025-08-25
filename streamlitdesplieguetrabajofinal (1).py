@@ -25,7 +25,6 @@ modelo_file = "DecisionTreeClassifier_pipeline.pkl"
 
 try:
     modelo = joblib.load(modelo_file)
-    st.success("✅ Modelo Decision Tree cargado correctamente.")
 except Exception as e:
     st.error(f"No se pudo cargar el modelo Decision Tree: {e}")
     st.stop()
