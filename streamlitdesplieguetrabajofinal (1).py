@@ -19,35 +19,16 @@ st.title("📊 Predicción de Naturaleza de la Violencia")
 st.write("Sube un archivo Excel con los datos de despliegue.")
 
 # ==============================
-# 2. Cargar Modelos
+# 2. Cargar Modelo (solo Decision Tree)
 # ==============================
-modelos = {
-    "Logistic Regression": "LogisticRegression_pipeline.pkl",
-    "Linear SVC": "LinearSVC_pipeline.pkl",
-    "KNeighbors": "KNeighborsClassifier_pipeline.pkl",
-    "Decision Tree": "DecisionTreeClassifier_pipeline.pkl",
-    "SVM": "SVM_pipeline.pkl",
-    "Voting Classifier": "VotingClassifier_pipeline.pkl",
-    # "Random Forest": "RandomForestClassifier_pipeline.pkl",  # pesa demasiado
-    "XGBoost": "XGBoostClassifier_pipeline.pkl"
-}
+modelo_file = "DecisionTreeClassifier_pipeline.pkl"
 
-# Cargar todos los modelos en memoria
-modelos_cargados = {}
-for nombre, archivo in modelos.items():
-    try:
-        modelos_cargados[nombre] = joblib.load(archivo)
-    except Exception as e:
-        st.warning(f"No se pudo cargar {nombre}: {e}")
-
-# ==============================
-# 2b. Cargar LabelEncoder (solo para XGBoost)
-# ==============================
 try:
-    label_encoder = joblib.load("LabelEncoder_pipeline.pkl")
+    modelo = joblib.load(modelo_file)
+    st.success("✅ Modelo Decision Tree cargado correctamente.")
 except Exception as e:
-    label_encoder = None
-    st.warning(f"No se pudo cargar el LabelEncoder: {e}")
+    st.error(f"No se pudo cargar el modelo Decision Tree: {e}")
+    st.stop()
 
 # ==============================
 # 3. Subir archivo Excel
@@ -60,33 +41,22 @@ if uploaded_file is not None:
     st.dataframe(df.head())
 
     # ==============================
-    # 4. Predicciones con cada modelo
+    # 4. Predicciones con Decision Tree
     # ==============================
-    resultados = pd.DataFrame()
+    try:
+        y_pred = modelo.predict(df)
+        resultados = pd.DataFrame({"Predicción_DecisionTree": y_pred})
+        
+        # Mostrar resultados
+        st.write("### 📊 Resultados de predicción (Decision Tree)")
+        st.dataframe(resultados)
 
-    for nombre, modelo in modelos_cargados.items():
-        try:
-            y_pred = modelo.predict(df)
-
-            # Si es XGBoost, decodificar con el LabelEncoder
-            if nombre == "XGBoost" and label_encoder is not None:
-                y_pred = label_encoder.inverse_transform(y_pred)
-
-            resultados[nombre] = y_pred
-
-        except Exception as e:
-            st.error(f"Error al predecir con {nombre}: {e}")
-
-    # ==============================
-    # 5. Mostrar comparación
-    # ==============================
-    st.write("### 📊 Comparación de resultados por modelo")
-    st.dataframe(resultados)
-
-    # Opción para descargar la tabla
-    st.download_button(
-        label="⬇️ Descargar resultados",
-        data=resultados.to_csv(index=False).encode('utf-8'),
-        file_name="comparacion_modelos.csv",
-        mime="text/csv"
-    )
+        # Opción para descargar la tabla
+        st.download_button(
+            label="⬇️ Descargar resultados",
+            data=resultados.to_csv(index=False).encode('utf-8'),
+            file_name="predicciones_decisiontree.csv",
+            mime="text/csv"
+        )
+    except Exception as e:
+        st.error(f"Error al predecir con el modelo Decision Tree: {e}")
